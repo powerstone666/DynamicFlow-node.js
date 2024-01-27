@@ -117,22 +117,7 @@ server.post("/logout",async (req,res)=>{
         message:"Logged out Successfully"
     })
 })
-server.post("/noteedit" ,async (req,res)=>{
-   const a= await isAuthen(req,res);
-    try{
 
-        const {title,note,id}=req.body;
-        await editnote (title,note,a,id);
-        return res.status(200).json({
-            success:true,
-            message:"Updated Successfully"
-        })
-    }
-    catch(e)
-    {
-       
-        }
-})
 server.post("/noteadd" ,async (req,res)=>{
     const a= await isAuthen(req,res);
 try{
@@ -343,6 +328,22 @@ server.post("/noteedit/:id",async (req,res)=>{
          
               }
 
+ })
+ server.post("/noteedit/:id" ,async (req,res)=>{
+    const a= await isAuthen(req,res);
+     try{
+            const {id}=req.params;
+         const {title,note}=req.body;
+         await editnote (title,note,a,id);
+         return res.status(200).json({
+             success:true,
+             message:"Updated Successfully"
+         })
+     }
+     catch(e)
+     {
+        
+         }
  })
 server.listen(5000,()=>{
     console.log("Server is running on port:5000")
