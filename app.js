@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import isAuthen from "./auth.js";
 // app.js (main entry file)
 import dotenv from 'dotenv';
+import isAdmin from "./admin.js";
 dotenv.config();
 
 // Rest of your application setup...
@@ -31,9 +32,9 @@ server.get("/",(req,res)=>{
     res.send("Welcome to the server")
 })
 server.get("/view",async (req,res)=>{
-
+      
     try{
-
+     await isAdmin(req,res);
    const show=await getUser();
     res.json(show);
     }
@@ -197,7 +198,7 @@ server.post("/adminlogin", async (req,res)=>{
 server.get("/adminview",async (req,res)=>{
 
     try{
-
+        await isAdmin(req,res);
     const {token}=req.cookies;
 
     if(!token)
@@ -219,6 +220,7 @@ server.get("/adminview",async (req,res)=>{
 })
 server.delete("/delete/:id",async (req,res)=>{
     try{
+        await isAdmin(req,res);
         const {token}=req.cookies;
 
         if(!token)
@@ -257,7 +259,7 @@ server.delete("/notedel/:id",async (req,res)=>{
 })
 server.put("/edit/:id",async (req,res)=>{
     try{
-
+        await isAdmin(req,res);
     const {token}=req.cookies;
 
     if(!token)
@@ -282,7 +284,7 @@ server.put("/edit/:id",async (req,res)=>{
 })
 server.get("/viewid/:id",async (req,res)=>{
     try{
-
+        await isAdmin(req,res);
     const {token}=req.cookies;
 
     if(!token)
