@@ -27,6 +27,9 @@ next();
 });
 
 server.use(cors(corsOptions));
+server.get("/",(req,res)=>{
+    res.send("Welcome to the server")
+})
 server.get("/view",async (req,res)=>{
 
     try{
