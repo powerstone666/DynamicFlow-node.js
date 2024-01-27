@@ -105,9 +105,13 @@ server.get("/profile",async (req,res)=>{
             }
 })
 
-server.post("/logout",(req,res)=>{
+server.post("/logout",async (req,res)=>{
+    await isAuthen(req,res);
   res.status(200).cookie("token"," ",{
-        expires:new Date(0)
+        maxAge:1,
+        httpOnly:true,
+        sameSite:"none",
+        secure:"false"
     }).json({
         success:true,
         message:"Logged out Successfully"
