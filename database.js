@@ -100,7 +100,7 @@ export async function deleteUser(id)
        
     }
 }
-export async function editnote(title, note, a, id) {
+export async function editnote(title, note, id, a) {
     try {
         const [row] = await pool.query("UPDATE notes SET note=?, title=? WHERE note_id=? AND userid=?", [note, title, id, a]);
         return row;

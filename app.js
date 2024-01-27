@@ -310,41 +310,36 @@ server.get("/noteid/:id",async (req,res)=>{
         
             }
 })
-server.post("/noteedit/:id",async (req,res)=>{
-    const a= await isAuthen(req,res);
-     try{
 
-         const {id}=req.params;
-        const {title,note}=req.body;
-        
-         const use=await setnote(id,a);
-         return res.status(200).json({
-             success:true,
-             use
-         })
-     }
-     catch(err)
-     {
-         
-              }
+ server.post("/noteedit/:id", async (req, res) => {
+ 
+    try {
+       
+        // Authenticate user
+        const a = await isAuthen(req, res);
 
- })
- server.post("/noteedit/:id" ,async (req,res)=>{
-    const a= await isAuthen(req,res);
-     try{
-            const {id}=req.params;
-         const {title,note}=req.body;
-         await editnote (title,note,a,id);
-         return res.status(200).json({
-             success:true,
-             message:"Updated Successfully"
-         })
-     }
-     catch(e)
-     {
-        
-         }
- })
+        // Extract id from route params
+        const { id } = req.params;
+        // Extract title and note from request body
+        const { title, note } = req.body;
+
+        // Call editnote function with correct parameter order
+        await editnote(title, note, id, a);
+
+        return res.status(200).json({
+            success: true,
+            message: "Updated Successfully"
+        });
+    } catch (e) {
+     
+        // Handle error response
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+});
+
 server.listen(5000,()=>{
     console.log("Server is running on port:5000")
 })
