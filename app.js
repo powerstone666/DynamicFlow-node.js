@@ -17,20 +17,15 @@ const server=express();
 server.use(express.json())
 server.use(cookieParser())
 const corsOptions = {
-    origin:"http://localhost:5173", // Update this with your frontend URL
+    origin:process.env.FRONTEND_URL, // Update this with your frontend URL
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
     optionsSuccessStatus: 204, // Set the response to preflight requests to 204
 };
-server.use((req, res, next) => {
-res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-next();
-});
+
 
 server.use(cors(corsOptions));
-server.get("/",(req,res)=>{
-    res.send("Welcome to the server")
-})
+
 server.get("/view",async (req,res)=>{
       
     try{
@@ -91,7 +86,7 @@ try{
     sendCookie(user,res,`Logged In Successfully ${user.firstname}`,200);
 }
 catch(e){
-  
+        console.log(e)
     }
 })
 
