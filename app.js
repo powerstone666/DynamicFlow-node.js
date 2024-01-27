@@ -105,7 +105,7 @@ server.get("/profile",async (req,res)=>{
             }
 })
 
-server.get("/logout",(req,res)=>{
+server.post("/logout",(req,res)=>{
   res.status(200).cookie("token"," ",{
         expires:new Date(0)
     }).json({
