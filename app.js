@@ -17,7 +17,7 @@ const server=express();
 server.use(express.json())
 server.use(cookieParser())
 const corsOptions = {
-    origin:process.env.FRONTEND_URL, // Update this with your frontend URL
+    origin:"http://localhost:5173", // Update this with your frontend URL
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
     optionsSuccessStatus: 204, // Set the response to preflight requests to 204
