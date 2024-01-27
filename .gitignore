@@ -1,0 +1,4 @@
+.env
+process.env
+config/
+node_modules/
