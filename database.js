@@ -78,6 +78,17 @@ export async function  getadmin(email)
         
     }
 }
+export async function  getadmininfo(id)
+{
+    try{
+        const [row]=await pool.query("SELECT email FROM admin WHERE id=?",[id])
+        return row;
+    }
+    catch(err)
+    {
+        
+    }
+}
 export async function edit(id,firstname,lastname,email)
 {
     try{

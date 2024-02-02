@@ -1,6 +1,6 @@
 import  express  from "express";
 import cors from "cors";
-import {getUser,getEmail,createUser,getadmin,edit,deleteUser,getid,noteadd,editnote,getnotes,deletenote,getnote,setnote} from "./database.js";
+import {getUser,getEmail,createUser,getadmin,edit,deleteUser,getid,noteadd,editnote,getnotes,deletenote,getnote,setnote,getadmininfo} from "./database.js";
 import bycrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendCookie from "./cook.js";
@@ -173,12 +173,29 @@ server.post("/adminlogin", async (req,res)=>{
            return;
        }
        sendCookie(user,res,`Logged In Successfully ${user.firstname}`,200);
+      
+      
    }
    catch(e){
      
           }
 })
-
+server.get("/adminprofile",async (req,res)=>{
+    try{
+        const user= await isAdmin(req,res);
+        
+        const info=await getadmininfo(user);
+       
+        res.status(200).json({
+            success:true,
+            info
+        })
+    }
+    catch(e)
+    {
+        
+            }
+})
 server.get("/adminview",async (req,res)=>{
 
     try{
