@@ -23,7 +23,6 @@ const corsOptions = {
     optionsSuccessStatus: 204, // Set the response to preflight requests to 204
 };
 
-
 server.use(cors(corsOptions));
 
 server.get("/view",async (req,res)=>{
