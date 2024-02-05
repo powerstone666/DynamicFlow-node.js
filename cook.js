@@ -11,7 +11,7 @@ export default function sendCookie(user, res, message, statusCode = 200) {
        res.status(statusCode).cookie("token", token, {
             httpOnly: true,
             maxAge:  5*60*60 * 60 * 1000,
-            sameSite:"secure",
+            sameSite:"lax",
             secure:"true"
         }).json({
             success: true,
